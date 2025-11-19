@@ -1,0 +1,44 @@
+\section{NPN Circuit with E resistance}
+
+In Figure \ref{fig:ex8_question}, calculate the values of $I_B$, $I_C$, $I_E$, $V_E$, and $V_C$. Assume the voltage drop $V_{BE}=0.7\,\mathrm{V}$ and the transistor current gain coefficient of the transistor is $\beta=100$. Then perform a simulation to double-check your theoretical calculations.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphics/ex8_question.png}
+    \caption{NPN Circuit with E resistance}
+    \label{fig:ex8_question}
+\end{figure}
+
+\subsection{Theoretical calculation}
+
+\textbf{\textit{Notes}}
+
+\textit{Explanations, formulas, and equations are expected rather than only results.}\\
+
+According to KVL theorem, we have:
+\[
+V_2 - I_B \cdot R_1 - V_{BE} - I_E \cdot R_3 = 0
+\]
+\[\Longleftrightarrow  V_2 - I_B \cdot R_1 - V_{BE} - (1 + \beta)I_B \cdot R_3 = 0 (1)\]
+
+Solve equation (1) to find $I_B$:
+\[I_B = \frac{V_2 - V_{BE}}{R_1 + (1 + \beta) R_3} = \frac{4~\text{V} - 0.7~\text{V}}{40~\text{k}\Omega + (1 + 100) \cdot 1~\text{k}\Omega} \approx 23.4~\mu\text{A}\]
+
+From that, we can calculate:
+\begin{itemize}
+    \item $I_C = \beta \cdot I_B = 100 \cdot 23.4~\mu\text{A} = 2.34~\text{mA}$
+    \item $I_E = (1 + \beta) \cdot I_B = 101 \cdot 23.4~\mu\text{A} \approx 2.36~\text{mA}$
+    \item $V_E = I_E \cdot R_3 = 2.36~\text{mA} \cdot 1~\text{k}\Omega \approx 2.36~\text{V}$
+    \item $V_C = V_1 - I_C \cdot R_2 = 12~\text{V} - 2.34~\text{mA} \cdot 1~\text{k}\Omega \approx 9.66~\text{V}$
+\end{itemize}
+
+\subsection{Simulation}
+
+\textbf{Your images goes here}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphics/ex8_sim.png}
+    \caption{Simulation result of NPN Circuit with E resistance}
+    \label{fig:ex8_simulation}
+\end{figure}

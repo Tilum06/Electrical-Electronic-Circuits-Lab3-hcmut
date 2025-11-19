@@ -1,0 +1,59 @@
+\section{PNP Circuit}
+
+Figure~\ref{fig:ex6-question} shows a very typical PNP transistor circuit. Calculate $I_B$ , $I_E$ , and $I_C$ then simulate the circuit to double-check your calculation. Assume the current gain $\beta = 100$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphics/ex6_question.png}
+    \caption{A PNP Circuit.}
+    \label{fig:ex6-question}
+\end{figure}
+
+\subsection{Theoretical Calculation}
+
+\textbf{\textit{Notes:}}
+
+\textit{Explanations, formulas, and equations are expected rather than only results.}\\
+
+Because the base–emitter junction of a PNP transistor is forward-biased, the emitter is approximately 0.7 V higher than the base. Therefore,
+\[V_{EB} = 0.7~\text{V}\]
+
+According to KVL at the base-emitter loop,
+\[I_B = \frac{V_{EE} - V_{EB} - V_{BB}}{R_B} = \frac{12~\text{V} - 0.7~\text{V} - 8~\text{V}}{40\text{k}\Omega} = 82.5~\mu\text{A}\]
+
+Calculate the collector current $I_C$:
+\[I_C = \beta \cdot I_B = 100 \cdot 82.5~\mu\text{A} = 8.25~\text{mA}\]
+
+Calculate the emitter current $I_E$:
+\[I_E = I_C + I_B = 8.25~\text{mA} + 0.0825~\text{mA} = 8.3325~\text{mA}\]
+
+\subsection{Simulation}
+
+\textbf{Your image goes here:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphics/ex6_sim.png}
+    \caption{Simulation results for the PNP transistor circuit.}
+    \label{fig:ex6-sim}
+\end{figure}
+
+\subsection{Compare}
+
+\[
+I_B \text{(in theory)} = 82.5~\mu\text{A}
+\qquad
+I_B \text{(simulation)} = 79.31~\mu\text{A}
+\]
+
+\[
+I_C \text{(in theory)} = 8.25~\text{mA}
+\qquad
+I_C \text{(simulation)} = 7.931~\text{mA}
+\]
+
+\[
+I_E \text{(in theory)} = 8.3325~\text{mA}
+\qquad
+I_E \text{(simulation)} = 8.010~\text{mA}
+\]
+

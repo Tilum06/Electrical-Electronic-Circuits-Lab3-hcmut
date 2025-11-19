@@ -1,0 +1,42 @@
+\section{Common base}
+
+Figure \ref{fig:ex10_question} shows  shows a bias techniques named common base bias. Calculate the values of $I_E$, $I_B$, $I_C$ and $V_{CE}$. Then simulate the circuit to double-check your theoretical calculations. Assume the current gain coefficient $\beta = 100$.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphics/ex10_question.png}
+    \caption{Common base}
+    \label{fig:ex10_question}
+\end{figure}
+
+\subsection{Theoretical calculation}
+
+\textbf{\textit{Notes}}
+
+\textit{Explanations, formulas, and equations are expected rather than only results.}\\
+
+Apply KVL for the left loop, we have:
+\[-V_1 + I_E \cdot R_1 + V_{BE} =0\]
+\[\Longleftrightarrow I_E = \frac{V_1 - V_{BE}}{R_1} = \frac{4~\text{V} - 0.7~\text{V}}{1.2~\text{k}\Omega} = 2.75~\text{mA}\]
+
+From that, we can calculate:
+\begin{itemize}
+    \item $I_B = \frac{I_E}{\beta + 1} = \frac{2.75~\text{mA}}{100 + 1} \approx 27.2~\mu\text{A}$
+    \item $I_C = \beta \cdot I_B = 100 \cdot 27.2~\mu\text{A} = 2.72~\text{mA}$
+\end{itemize}
+
+Apply KVL for the right loop, we have:
+\[V_2 - I_C \cdot R_2 - V_C = 0\]
+\[\Longleftrightarrow V_C = V_2 - I_C \cdot R_2 = 10~\text{V} - 2.72~\text{mA} \cdot 2.4~\text{k}\Omega = 3.472~\text{V}\]
+\[\Longleftrightarrow V_{CE} = V_C - V_E = 3.472~\text{V} - (-0.7~\text{V}) = 4.172~\text{V}\]
+
+\subsection{Simulation}
+\textbf{Your images goes here}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphics/ex10_sim.png}
+    \caption{Simulation result of Common base}
+    \label{fig:ex10_simulation}
+\end{figure}

@@ -1,0 +1,139 @@
+\section{Drive a device with an NPN BJT}
+
+This exercise has a 5\,V logic output (the $V_{ter}$ in Figure~\ref{fig:ex4_question}) that can source up to 10\,mA of current without a severe voltage drop and can withstand a maximum current of 20\,mA. If the logic terminal sources a current larger than 20\,mA, it would be damaged. If it sources a current larger than 10\,mA, the $V_{ter}$ voltage will drop to less than 4\,V; we should avoid this drop in many cases. However, this logic terminal has to be used to drive an electrical component with an equivalent internal resistance of 5\,$\Omega$ (the LOAD in Figure~1.6) and requires a current of at least 300\,mA and not exceeding 500\,mA to function normally. Given that we have an NPN transistor with the current gain $\beta=100$, the maximum collector current $I_C$ is 400\,mA, and the barrier potential at the BE junction is $V_{BE}=0.7\,$V, select a resistor available on the market to replace the resistor $R_B$ shown in Figure~1.6 to make the circuit function well. After that, perform a simulation to double-check your selection.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{graphics/ex4_question.png}
+    \caption{Select a resistor available in the market for $R_B$.}
+    \label{fig:ex4_question}
+\end{figure}
+
+\subsection{Theory calculations}
+
+\textbf{\textit{Notes:}}
+
+\textit{Explanations, formulas, and equations are expected rather than only results.}\\
+
+
+The load requires a collector current in the range:
+\[
+300\,\text{mA} < I_L < 500\,\text{mA}
+\]
+However, the transistor used can only provide a maximum collector current of:
+\[
+I_{C(\text{max})} = 400\,\text{mA}
+\]
+Therefore, the allowable collector-current range is:
+\[
+300\,\text{mA (min)} < I_C < 400\,\text{mA (max)}.
+\]
+
+With the transistor current gain $\beta = 100$, the corresponding base-current range is:
+\[
+\frac{I_{C(\text{min})}}{\beta} = \frac{300\text{mA}}{100}=3\text{mA (min)} < I_B <
+\frac{I_{C(\text{max})}}{\beta} = \frac{400\text{mA}}{100}=4\text{mA (max)}.
+\]
+
+According to the circuit in Figure~\ref{fig:ex4_question}, the base current is
+\[
+I_B = \frac{V_2 - V_{BE}}{R_1 + R_B}
+      = \frac{5\text{V} - 0.7\text{V}}{100\Omega + R_B}.
+\]
+
+With $I_{B(\text{min})} = 3\text{mA}$, we have
+\[
+100\Omega + R_{B(\text{max})}
+= \frac{5\text{V} - 0.7\text{V}}{3\text{mA}}
+= \frac{4.3\text{V}}{3\text{mA}}
+\approx 1433\Omega,
+\]
+\[
+R_{B(\text{max})} \approx 1433\Omega - 100\Omega = 1333\Omega = 1.33\text{k}\Omega.
+\]
+
+With $I_{B(\text{max})} = 4\text{mA}$, we have
+\[
+100\Omega + R_{B(\text{min})}
+= \frac{5\text{V} - 0.7\text{V}}{4\text{mA}}
+= \frac{4.3\text{V}}{4\text{mA}}
+= 1075\Omega,
+\]
+\[
+R_{B(\text{min})} = 1075\Omega - 100\Omega = 975\Omega = 0.98\text{k}\Omega.
+\]
+
+Therefore, the base resistor must satisfy:
+\[
+0.98\text{k}\Omega \;(\text{min}) < R_B < 1.33\text{k}\Omega \;(\text{max}).
+\]
+
+$R_B$ selected is 1\,k$\Omega$, which satisfies the above condition.
+
+
+\subsection{Simulation}
+
+\textbf{Your image goes here:}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphics/ex4_sim_R1000.png}
+    \caption{Simulation results with $R_B = 1\,\text{k}\Omega$ (selected).}
+    \label{fig:ex4-sim}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphics/ex4_sim_Rmax.png}
+    \caption{Simulation results with $R_B$ max.}
+    \label{fig:ex4-simRmax}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphics/ex4_sim_Rmin.png}
+    \caption{Simulation results with $R_B$ min.}
+    \label{fig:ex4-simRmin}
+\end{figure}
+
+\subsection{Compare}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|cccc|ccc}
+        & \multicolumn{4}{c|}{Theory} & \multicolumn{3}{c}{PSpice} \\[2pt]
+        & $R_B$ & $V_{BE}$ & $I_B$ & $I_C$ & $V_{BE}$ & $I_B$ & $I_C$ \\ \hline
+        
+        $R_{B(\min)}$ 
+        & $0.98\ \mathrm{k}\Omega$ 
+        & $0.7\ \mathrm{V}$ 
+        & $4.00\ \mathrm{mA}$ 
+        & $400\ \mathrm{mA}$ 
+        & $0.9278\ \mathrm{V}$ 
+        & $3.788\ \mathrm{mA}$ 
+        & $378.8\ \mathrm{mA}$ \\[4pt]
+        
+        $R_{B(\max)}$ 
+        & $1.33\ \mathrm{k}\Omega$ 
+        & $0.7\ \mathrm{V}$ 
+        & $3.00\ \mathrm{mA}$ 
+        & $300\ \mathrm{mA}$ 
+        & $0.9204\ \mathrm{V}$ 
+        & $2.846\ \mathrm{mA}$ 
+        & $284.6\ \mathrm{mA}$ \\[4pt]
+        
+        $R_{B(\text{selected})}$ 
+        & $1.00\ \mathrm{k}\Omega$ 
+        & $0.7\ \mathrm{V}$ 
+        & $3.91\ \mathrm{mA}$ 
+        & $391\ \mathrm{mA}$ 
+        & $0.9272\ \mathrm{V}$ 
+        & $3.703\ \mathrm{mA}$ 
+        & $370.3\ \mathrm{mA}$ \\
+    \end{tabular}
+    \caption{Theory and PSpice comparison.}
+    \label{tab:ex4_compare}
+\end{table}
+From Table~\ref{tab:ex4_compare}, we can see that the PSpice simulation results are quite close to the theoretical calculations. The small differences may be due to the non-ideal characteristics of the transistor model used in the simulation.

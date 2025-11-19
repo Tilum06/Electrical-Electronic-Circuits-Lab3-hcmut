@@ -1,0 +1,37 @@
+\section{BJT in Saturation Mode}
+
+Change the value of $R_1$ to $1\ \text{k}\Omega$ and run the simulation again. Capture the simulation results and explain the values of $I_B$, $I_C$, and $V_{CE}$. The default transistor gain is $\beta = 100$, and the saturation voltages are $V_{CE(\mathrm{sat})} = 0.65\ \text{V}$ and $V_{BE} = 0.7\ \text{V}$.
+
+\textbf{Your image goes here:}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{graphics/ex1_sim.png}
+	\caption{Simulation results for the BJT when $R_1 = 1\ \mathrm{k}\Omega$.}
+	\label{fig:ex1-sim}
+\end{figure}
+
+
+\noindent The results in PSpice are explained as follows:
+
+\begin{itemize}
+    \item According to Ohm's Law,
+    
+    \[I_B = \frac{V_{CC} - V_{BE}}{R_1} = \frac{5V-0.7V}{1k\Omega} = 4.3\text{mA}\]
+    
+    \item It is assumed that the transistor is in linear (or active) mode,
+    
+    \[I_C = \beta \cdot I_B = 100 \cdot 4.3\ \text{mA} = 430\ \text{mA} = 0.43\ \text{A}\]
+    \item Finally, in order to confirm the assumption above, 
+    
+    \[V_{CE} = V_{CC} - I_C \cdot R_2 = 10\text{V} - 0.43\text{A} \cdot 100\Omega = -33\text{V}\]
+\end{itemize}
+
+Since $V_{CE} < 0$, our assumption is not correct.  
+The transistor stays in saturation mode.  
+Therefore, $I_C$ is determined as follows:
+
+\[
+I_C = \frac{V_{CC} - V_{CE(\text{sat})}}{R_2} = \frac{10\text{V} - 0.65\text{V}}{100\Omega} = 93.5\text{mA}
+\]
+

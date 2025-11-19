@@ -1,0 +1,52 @@
+\section{Exercise 3: BJT used at Switch}
+For a given BJT circuit, determine $R_1$ and $R_2$ so that $I_C$ is saturated at $50\ \mathrm{mA}$. In this saturation mode $V_{\text{CE(sat)}}$ is $30\ \mathrm{mV}$. Assume that $V_{BE}=0.7\ \mathrm{V}$ and the current gain $\beta=100$.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{graphics/ex3-circuit.png}
+  \caption{BJT used as switch in saturation mode}
+  \label{fig:ex3-circuit}
+\end{figure}
+
+\subsection{Solution}
+In saturation mode, we have:
+\begin{align*}
+    V_{CE(sat)} = 30\ \mathrm{mV} \\
+    I_C = 50\ \mathrm{mA} \\
+    V_{BE} = 0.7\ \mathrm{V} \\
+    \beta = 100
+\end{align*}
+
+Applying KVL, we have:
+\begin{align*}
+    V_2 &= I_C*R_2 + V_{CE(sat)} \\
+    10V &= 50\ \mathrm{mA} * R_2 + 30\ \mathrm{mV} \\
+    R_2 &= 199,4\ \Omega
+\end{align*}
+
+Applying KVL, we have:
+\begin{align*}
+    V_1 &= I_B*R_1 + V_{BE} \\
+    I_B &= \frac{I_C}{\beta} = \frac{50\ \mathrm{mA}}{100} = 0.5\ \mathrm{mA} \\
+    5V &= 0.5\ \mathrm{mA} * R_1 + 0.7\ \mathrm{V} \\
+    R_1 &= 8.6\ \mathrm{k\Omega}
+\end{align*}
+
+Thus, we have:
+\begin{align*}
+    R_1 = 8.6\ \mathrm{k\Omega} \\
+    R_2 = 199.4\ \Omega
+\end{align*}
+
+\subsection{Simulation}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{graphics/ex3-simulation.png}
+  \caption{Simulation result of Exercise 3}
+  \label{fig:ex3-simulation}
+\end{figure}
+
+From the simulation result in Figure \ref{fig:ex3-simulation}, we can see that $I_C$ is not $50\ \mathrm{mA}$ and $V_{CE}$ is not $30\ \mathrm{mV}$ as calculated. Because the real SPICE model does not keep \(V_{BE}\), \(\beta\), or \(V_{CE(\text{sat})}\) fixed as assumed in the hand calculation.  
+The actual base current is not large enough to force saturation, so \(I_C\) and \(V_{CE}\) differ from the calculated values.
+% However, by adjusting \(R_1\) and \(R_2\) slightly, we can achieve the desired saturation current and voltage in the simulation.
+
+

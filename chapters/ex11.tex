@@ -1,0 +1,70 @@
+\section{Current mirror}
+The circuit shown in Figure \ref{fig:ex11-circuit} is known as a current mirror circuit. First, students do
+some theoretical calculations to get an understanding of it. After that, perform a simulation to double-check its principles and your analysis. Assume that the two transistors Q1
+and Q2, are the same type and the current gain $\beta = 100$.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{graphics/ex11-circuit.png}
+  \caption{Current mirror circuit example}
+  \label{fig:ex11-circuit}
+\end{figure}
+
+\subsection{Theoretical calculation}
+\textbf{Case 1:} $R_1 = 2 k\Omega$
+
+According to Ohm's law, we have:
+\begin{align*}
+    I_{CRL} = \frac{V_A - V_B}{R_1} = \frac{12V - 0.7V}{2k\Omega} = 5.65 mA \\
+\end{align*}
+
+Using the KCL at node B, we have:
+\begin{align*}
+    I_{CRL} = I_{C1} + I_{B1} + I_{B2} \\
+    I_{B1} = I_{B2} = \frac{I_{C1}}{100} \\
+\end{align*}
+
+Therefore:
+\begin{align*}
+    I_{B1} = I_{B2} = \frac{I_{CRL}}{102} = \frac{5.65 mA}{102} = 55.4 \mu A \\
+    I_L = 100 * I_{B2} = 100 * 55.4 \mu A = 5.54 mA \\
+\end{align*}
+
+\textbf{Case 2:} $R_1 = 100 \Omega$
+According to Ohm's law, we have:
+\begin{align*}
+    I_{CRL} = \frac{V_A - V_B}{R_1} = \frac{12V - 0.7V}{100\Omega} = 113 mA \\
+\end{align*}
+
+Using the KCL at node B, we have:
+\begin{align*}
+    I_{CRL} = I_{C1} + I_{B1} + I_{B2} \\
+    I_{B1} = I_{B2} = \frac{I_{C1}}{100} \\
+\end{align*}
+
+Therefore:
+\begin{align*}
+    I_{B1} = I_{B2} = \frac{I_{CRL}}{102} = \frac{113 mA}{102} = 1.11 mA \\
+    I_L = 100 * I_{B2} = 100 * 1.11 mA = 111 mA \\
+\end{align*}
+
+\subsection{Simulation}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{graphics/ex11-simulation-2kohm.png}
+  \caption{Simulation result of current mirror circuit with $R_1 = 2 k\Omega$}
+  \label{fig:ex11-simulation-2kohm}
+\end{figure}
+
+The circuit in Figure \ref{fig:ex11-circuit} is called circuit mirror because the mirrored current $I_L$ is approximately equal to the reference current $I_{CRL}$. From the simulation result in Figure \ref{fig:ex11-simulation-2kohm}, we can see that $I_{CRL} = 5.481 mA$ and $I_L = 5.481 mA$, which are equal to each other.
+\clearpage
+Next, we change the value of resistor $R_1$ to $100\Omega$ and perform the simulation again.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{graphics/ex11-simulation-100ohm.png}
+  \caption{Simulation result of current mirror circuit with $R_1 = 100 \Omega$}
+  \label{fig:ex11-simulation-100ohm}
+\end{figure}
+
+The phenomena means that $I_L$ is far from equal to $I_{CRL}$.
+
+Since $R_1$ is too small, then $I_{CRL}$ is too large, which makes transistor Q2 enter saturation region. Therefore, the current mirror circuit no longer works properly. From the simulation result in Figure \ref{fig:ex11-simulation-100ohm}, we can see that $I_{CRL} = 111 mA$ and $I_L = 11.98 mA$, which are not equal to each other.

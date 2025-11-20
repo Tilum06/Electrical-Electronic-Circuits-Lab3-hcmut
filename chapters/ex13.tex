@@ -1,0 +1,36 @@
+\section{Opto}
+The element OK1 in Figure 1.18 is an optocoupler, which includes a light-emitting diode
+(LED) and a photodiode. The photodiode's conductivity depends on the intensity of the
+light emitted by the LED and, of course, on the current through the LED. When the voltage
+across the LED is lower than its barrier potential, the optocoupler is cut off. When there
+is current through the LED, the optocoupler is in the transfer mode. Like the current
+gain $\beta$ of a BJT, the optocoupler also has a current transfer ratio (CTR). Assume
+the LED has a barrier potential $V_F = 1.7\text{V}$ and the optocoupler has CTR = 2.
+Calculate the voltage $V_{OUT}$ when the switch is closed. Finally, give your idea about
+what we may use an optocoupler for, and how to use it?
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{graphics/ex13-circuit.png}
+  \caption{Optocoupler circuit}
+  \label{fig:ex13-circuit}
+\end{figure}
+
+\subsection{Solution}
+\begin{align*}
+    I_F = I_{R1} = \frac{V_{BAT} - V_F}{R_1} = \frac{9V - 1.7V}{10k\Omega} = 0.73 mA \\
+    I_{R2} = I_C = CTR * I_F = 2 * 0.73 mA = 1.46 mA \\
+    V{OUT} = 5V - (I_C * R_2) = 5V - (1.46 mA * 4.7k\Omega) = -1.86 V \\
+\end{align*}
+
+We see that the output voltage $V_{OUT}$ is negative, which means that the transistor is in saturation mode. Therefore, we can approximate:
+\begin{align*}
+    V_{OUT} \approx V_{CE(sat)} \approx 0.2 V \\
+\end{align*}
+
+When the switch is opened, there is no current through the LED, and the optocoupler is cut off. Therefore, there is no current through resistor R2, and we have:
+\begin{align*}
+    V_{OUT} = 5V \\
+\end{align*}
+
+The opto sensor can be used as a non-contact switch or position / speed sensor. It consists of an infrared LED and a phototransistor facing each other. When the light path is not blocked, the phototransistor conducts; when an object interrupts the beam, the collector current decreases and the output voltage changes.
+In practice, we bias the LED with a current-limiting resistor and connect the phototransistor in a pull-up configuration. By placing a rotating disc or moving object inside the slot, the sensor generates pulses at its output, which can be counted or measured by an oscilloscope or a microcontroller to determine speed or position.

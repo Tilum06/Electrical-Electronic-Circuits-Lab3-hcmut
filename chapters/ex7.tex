@@ -1,0 +1,54 @@
+\section{Circuit with NPN and PNP bipolar junction transistors}
+Give the circuit in Figure \ref{fig:ex7-circuit}. Calculate the Voltage at all nodes and the current in all
+branches. Assume the current gain of both transistors is the same at $\beta$ = 100. Then perform a simulation and compare the result with the theoretical calculation.
+form a simulation and compare the result with the theoretical calculation.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{graphics/ex7-circuit.png}
+    \caption{Circuit with NPN and PNP bipolar junction transistors}
+    \label{fig:ex7-circuit}
+\end{figure}
+
+\subsection{Theoretical calculation}
+The transistor Q2 is OFF because $V_E < V_B$.
+
+Then, we can calculate the values for transistor Q1 as follows:
+
+Applying KVL, we have (assuming $\beta$ = 100):
+\begin{align*}
+    V_A &= I_B * R_B + V_{BE} + I_E * R_E \\
+    I_E &= (1 + \beta) * I_B = 101I_B\\
+    V_A &= I_B * R_B + V_{BE} + 101I_B * R_E \\
+    I_B &= \frac{V_A - V_{BE}}{R_B + 101R_E} = \frac{5V - 0.7V}{10k\Omega + 101 * 1k\Omega} = 38.7 \mu A \\
+    I_C &= \beta * I_B = 100 * 38.7 \mu A = 3.87 mA \\
+    I_E &= I_C + I_B = 3.87 mA + 38.7 \mu A = 3.91 mA \\
+\end{align*}
+Calculating voltages at all nodes:
+\begin{align*}
+    V_B &= V_{BE} + I_E * R_E = 0.7V + 3.91 mA * 1k\Omega = 4.61 V \\
+    V_E &= I_E * R_E = 3.91 mA * 1k\Omega = 3.91 V \\
+\end{align*}
+
+\subsection{Simulation}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphics/ex7-simulation.png}
+    \caption{Simulation result of Exercise 7}
+    \label{fig:ex7-simulation}
+\end{figure}
+
+\subsection{Comparison}
+\begin{table}[H]
+    \centering
+    \caption{Comparison between theoretical values and PSpice simulation.}
+    \label{tab:ex7-comparison}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        Quantity & Theory & Simulation \\ \hline
+        $I_B\ (\mathrm{mA})$ & $0.03870$ & $0.03776$ \\ \hline
+        $I_C\ (\mathrm{mA})$ & $3.8700$ & $3.7760$ \\ \hline
+        $I_E\ (\mathrm{mA})$ & $3.9087$ & $3.8140$ \\ \hline
+        $V_E\ (\mathrm{V})$ & $3.9087$ & $3.8140$ \\ \hline
+        $V_B\ (\mathrm{V})$ & $4.6100$ & $4.6220$ \\ \hline
+    \end{tabular}
+\end{table}

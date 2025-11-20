@@ -1,0 +1,42 @@
+\section{Darlington circuit}
+The circuit given in Figure~\ref{fig:ex9-circuit} is known as a Darlington circuit. Calculate $I_{BE}$, $I_{AC}$, $I_{AL}$, and the overall current gain $\frac{I_{AL}}{I_{BE}}$. After that, simulate the circuit to double-check your theoretical calculations. Assume both transistors have the same current gain coefficient $\beta = 100$.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{graphics/ex9-circuit.png}
+  \caption{Darlington circuit}
+  \label{fig:ex9-circuit}
+\end{figure}
+\subsection{Theoretical calculation}
+Applying KVL, we have:
+\begin{align*}
+    V_{X} = I_{BE} * R_B + V_{BE1} + V_{BE2} \\
+    3V = I_{BE} * 470k\Omega + 0.7V + 0.7V \\
+    I_{BE} = \frac{3V - 1.4V}{470k\Omega} = 3.40 \mu A \\
+\end{align*}
+
+Calculating $I_{AL}$:
+\begin{align*}
+    I_{B2} = I_{E1} = (1 + \beta) * I_{BE} = 101 * 3.40 \mu A = 0.343 mA \\
+    I_{AL} = I_{C2} = \beta * I_{B2} = 100 * 0.343 mA = 34.3 mA \\
+\end{align*}
+
+We check if the calculated voltage $V_L$ is physically valid:
+\begin{align*}
+    V_L = V_{CC} - I_{AL} * R_C = 10V - 34.3 mA * 470\Omega = -6.16 V \\
+\end{align*}
+
+Since $V_L$ is negative, the transistor Q2 is in saturation mode. Therefore, we recalculate $I_{AL}$ assuming $V_{CE2(sat)} = 0.2 V$, $V_{BE1} = 0.7 V$, and $V_{BE2} = 0.8 V$:
+\begin{align*}
+    I_{AL} = \frac{V_{CC} - V_{CE2(sat)}}{R_C} = \frac{10V - 0.2V}{470\Omega} = 20.85 mA \\
+\end{align*}
+
+Calculating $I_{BE}$:
+\begin{align*}
+    3V = I_{BE} * 470k\Omega + 0.7V + 0.8V \\
+    I_{BE} = \frac{3V - 1.5V}{470k\Omega} = 3.19 \mu A \\
+\end{align*}
+
+Calculating $I_{AC}$:
+\begin{align*}
+    I_{AC} = I_{C1} = \beta * I_{BE} = 100 * 3.19 \mu A = 0.319 mA \\
+\end{align*}

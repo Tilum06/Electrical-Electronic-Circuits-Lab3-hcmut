@@ -1,0 +1,68 @@
+\section{Exercise 5: Simple bias configuration}
+The circuit given in \ref{fig:ex5-circuit} is known as a simple kind of NPN bias configuration. First,
+students simulate the circuit with two values of RC, respectively 10 Ohms and 1k Ohms.
+Then, give your statement on the change of the current $I_E$ and explain the phenomena.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{graphics/ex5-circuit.png}
+  \caption{Simple bias configuration circuit}
+  \label{fig:ex5-circuit}
+\end{figure}
+
+\subsection{Simulation}
+With $R_C$ = 10 Ohms, the simulation result is shown in Figure \ref{fig:ex5-simulation-10ohm}.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{graphics/ex5-simulation-10ohm.png}
+  \caption{Simulation result with $R_C$ = 10 Ohms}
+  \label{fig:ex5-simulation-10ohm}
+\end{figure}
+
+
+With $R_C$ = 1k Ohms, the simulation result is shown in Figure \ref{fig:ex5-simulation-1kohm}.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{graphics/ex5-simulation-1kohm.png}
+  \caption{Simulation result with $R_C$ = 1k Ohms}
+  \label{fig:ex5-simulation-1kohm}
+\end{figure}
+
+\subsection{Circuit analysis}
+We will redraw the circuit as in Figure \ref{fig:ex5-thevenin} for easier analysis, using Thevenin's theorem.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{graphics/ex5-thevenin.png}
+  \caption{Thevenin equivalent circuit}
+  \label{fig:ex5-thevenin}
+\end{figure}
+Calculating Thevenin's equivalent voltage and resistance:
+\begin{align*}
+    V_{TH} &= V_{CC} * \frac{R_2}{R_1 + R_2} = 12V * \frac{10k\Omega}{80k\Omega + 40k\Omega} = 4V \\
+    R_{TH} &= R_1 || R_2 = \frac{R_1 * R_2}{R_1 + R_2} = \frac{80k\Omega * 40k\Omega}{80k\Omega + 40k\Omega} = 26.67k\Omega
+\end{align*}
+
+Applying KVL in the input loop, we have:
+\begin{align*}
+    V_{TH} &= I_B * R_{TH} + I_E * R_E + V_{BE} \\
+    I_E &= (1 + \beta) * I_B \\
+    V_{TH} &= I_B * R_{TH} + (1 + \beta) * I_B * R_E + V_{BE} \\
+    I_B &= \frac{V_{TH} - V_{BE}}{R_{TH} + (1 + \beta) * R_E} = \frac{4 - 0.7}{26.67k\Omega + (1 + 100) * 3.3k\Omega} = 9.17 \mu A \\
+    I_E &= I_B * (1 + \beta) = 9.17 \mu A * 101 = 0.927 mA \\
+    I_C &= \beta * I_B = 9.17 \mu A * 100 = 0.917 mA
+\end{align*}
+\clearpage
+\textbf{When $R_C$ = 10 Ohms:} 
+
+The voltage drop across $R_C$ is $V_{RC} = I_C * R_C = 0.917 mA * 10 \Omega = 9.17 mV$. 
+
+This voltage drop is very small compared to $V_{CC}$, so the collector voltage $V_C$ remains high, allowing the transistor to operate in the active region. 
+
+Therefore, the emitter current $I_E$ is approximately 0.927 mA.
+
+\textbf{When $R_C$ = 1k Ohms:} 
+
+The voltage drop across $R_C$ is $V_{RC} = I_C * R_C = 0.917 mA * 1k \Omega = 0.917 V$. 
+
+This voltage drop is significant compared to $V_{CC}$, which reduces the collector voltage $V_C$. If $V_C$ drops below the base voltage minus $V_{BE}$, the transistor will enter saturation, causing a further increase in $I_E$. 
+
+However, in this case, the calculated $I_E$ remains approximately 0.927 mA, but the actual current may be limited by the supply voltage and the saturation of the transistor.
